@@ -3,8 +3,6 @@ Yuri PyBot Source Code
 Made By Steven Shrewsbury (AKA: stshrewsburyDev)
 """
 
-BOT_TOKEN =
-
 from libs.debug_logs import *
 
 INFO("setting things up, please wait...")
@@ -22,6 +20,7 @@ import libs.utils as utils
 INFO("task complete")
 
 DEBUG("setting up client...")
+BOT_TOKEN = str(os.environ.get("BOT_TOKEN"))
 Client = discord.Client()
 client = commands.Bot(command_prefix="y!")
 client.remove_command("help")
