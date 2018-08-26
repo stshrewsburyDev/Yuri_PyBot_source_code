@@ -62,8 +62,6 @@ async def playing_msg_loop():
     while True:
         await client.change_presence(game=discord.Game(name="Say y!help", type=1, url='https://twitch.tv/stshrewsburyDev'))
         await asyncio.sleep(8)
-        await client.change_presence(game=discord.Game(name="Doki Doki Literature Club", type=1, url='https://twitch.tv/stshrewsburyDev'))
-        await asyncio.sleep(8)
         await client.change_presence(game=discord.Game(name="Made With discord.py", type=1, url='https://twitch.tv/stshrewsburyDev'))
         await asyncio.sleep(8)
         await client.change_presence(game=discord.Game(name=("With " + str(len(list(client.get_all_members()))) + " Users"), type=1, url='https://twitch.tv/stshrewsburyDev'))
