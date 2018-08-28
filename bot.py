@@ -1,6 +1,6 @@
 """
 Yuri PyBot Source Code
-Made By Steven Shrewsbury (AKA: stshrewsburyDev)
+Made By Steven Shrewsbury Dev (AKA: stshrewsburyDev)
 """
 
 from libs.debug_logs import *
