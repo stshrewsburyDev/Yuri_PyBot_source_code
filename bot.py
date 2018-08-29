@@ -302,38 +302,6 @@ class general_commands:
             await client.say(embed=binary2num_error)
 
     @client.command(pass_context = True)
-    async def urban(ctx, *, text: str=None):
-        search_result = utils.search_urban(text)
-        if search_result is not None:
-            urban_msg = discord.Embed(title="",
-                                      description="",
-                                      colour=bot_embed_colour)
-            urban_msg.set_author(name=("Urban Search For: " + str(text)),
-                                 icon_url=client.user.avatar_url)
-            urban_msg.add_field(name="Definition:",
-                                value=str(search_result["definition"].replace("\n", " ")),
-                                inline=False)
-            urban_msg.add_field(name="Example:",
-                                value=str(search_result["example"].replace("\n", " ")),
-                                inline=False)
-            try:
-                await client.say(embed=urban_msg)
-            except:
-                urban_error = discord.Embed(title="",
-                                            description="There Was A Error While Searching Your Request\nPlease Try A Different Search Term",
-                                            colour=bot_error_embed_colour)
-                urban_error.set_author(name="Urban Search Error:",
-                                       icon_url=client.user.avatar_url)
-                await client.say(embed=urban_error)
-        else:
-            urban_error = discord.Embed(title="",
-                                        description="There Was A Error While Searching Your Request\nPlease Try A Different Search Term",
-                                        colour=bot_error_embed_colour)
-            urban_error.set_author(name="Urban Search Error:",
-                                   icon_url=client.user.avatar_url)
-            await client.say(embed=urban_error)
-
-    @client.command(pass_context = True)
     async def slap(ctx, user: discord.Member = None):
         if user is None:
             slap_msg = discord.Embed(title="",
