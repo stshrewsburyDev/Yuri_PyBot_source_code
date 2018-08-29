@@ -917,21 +917,6 @@ class fun_commands:
         await client.say(embed=dance_msg)
 
     @client.command(pass_context = True)
-    async def middle_finger(ctx):
-        if ctx.message.channel.is_nsfw():
-            middle_finger_msg = discord.Embed(title="",
-                                              description="",
-                                              colour=bot_embed_colour)
-            middle_finger_msg.set_author(name="O-Ok...")
-            middle_finger_msg.set_image(url=random.choice(var_list.middle_finger_command_images))
-            await client.say(embed=middle_finger_msg)
-        else:
-            nsfw_command = discord.Embed(title="NSFW Command:",
-                                         description="Sorry, But This Command Has Been Deemed As NSFW. It Can Only Be Used In An NSFW Channel.",
-                                         colour=bot_error_embed_colour)
-            await client.say(embed=nsfw_command)
-
-    @client.command(pass_context = True)
     async def dice_roll(ctx):
         dice_roll_msg = discord.Embed(title="",
                                       description=("You Rolled A: " + str(random.randint(1, 6))),
