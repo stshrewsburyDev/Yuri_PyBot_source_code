@@ -3,7 +3,7 @@ Utils For Yuri PyBot
 Made By Steven Shrewsbury (AKA: stshrewsburyDev)
 """
 
-import re, urbandict, random, json
+import re, random, json
 
 def reverse(text):
     reversed = ""
@@ -77,22 +77,6 @@ def bin2numconv(number):
         denary_number = str(int(str(number), 2))
 
     return denary_number
-
-def search_urban(search_term):
-    if search_term is None:
-        return None
-    try:
-        search_results = urbandict.define(search_term)
-    except:
-        return None
-    if "There aren't any definitions" in search_results[0]['def']:
-        return None
-    else:
-        result = {}
-        result["definition"] = search_results[0]['def']
-        result["example"] = search_results[0]['example']
-
-        return result
 
 def rps_get_emoji(rps):
     if rps.lower() == "rock":
