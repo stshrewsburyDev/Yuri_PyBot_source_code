@@ -4,7 +4,7 @@ The Source Code For Yuri PyBot Used By Heroku To Host The Bot.
 # The Bot's Home/Support Server:
 https://discord.io/stshrewsburyDev
 
-# Or If Above Doens't Work:
+# Or If Above Doesn't Work:
 https://discord.gg/jNDpCvM
 
 # See The Bot On discordbots.org:
