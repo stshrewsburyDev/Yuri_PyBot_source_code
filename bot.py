@@ -918,7 +918,7 @@ class fun_commands:
 
     @client.command(pass_context = True)
     async def middle_finger(ctx):
-        if ctx.channel.is_nsfw():
+        if ctx.message.channel.is_nsfw():
             middle_finger_msg = discord.Embed(title="",
                                               description="",
                                               colour=bot_embed_colour)
