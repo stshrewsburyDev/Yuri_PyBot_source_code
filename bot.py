@@ -1,6 +1,6 @@
 """
 Yuri PyBot Source Code
-Made By Steven Shrewsbury Dev (AKA: stshrewsburyDev)
+Made By Steven Shrewsbury (AKA: stshrewsburyDev)
 """
 
 from libs.debug_logs import *
@@ -10,7 +10,7 @@ INFO("setting things up, please wait...")
 DEBUG("importing needed libraries...")
 from discord.ext import commands
 from discord.ext.commands import Bot
-import discord, asyncio, os, time, random, platform
+import discord, asyncio, os, time, random, platform, requests
 INFO("task complete")
 
 DEBUG("setting up custom libraries...")
@@ -21,6 +21,7 @@ INFO("task complete")
 
 DEBUG("setting up client...")
 BOT_TOKEN = str(os.environ.get("BOT_TOKEN"))
+BOT_LOG_WEBHOOK_URL = str(os.environ.get("BOT_LOG_WEBHOOK_URL"))
 Client = discord.Client()
 client = commands.Bot(command_prefix="y!")
 client.remove_command("help")
@@ -47,8 +48,29 @@ async def on_ready():
     LOG(next_log)
     client.loop.create_task(playing_msg_loop())
 
+def send_webhook_log(description, thumbnail, extra_fields):
+    embed_log = {}
+
+    embed_log["title"] = "Yuri PyBot Log:"
+    embed_log["description"] = description
+    embed_log["thumbnail"] = {"url": thumbnail}
+    embed_log["color"] = int("6d00b3", 16)
+
+    if len(extra_fields) != 0:
+        embed_log["feilds"] = []
+        for feild in extra_fields:
+            embed_log['fields'].append({"name":feild[0],"value":feild[1]})
+
+    data = {"embeds": [embed_log]}
+    requests.post(BOT_LOG_WEBHOOK_URL, json=data)
+
 @client.event
 async def on_server_join(server):
+    webhook_desc = "Joined New Server: **" + str(server) + "**"
+    send_webhook_log(description=webhook_desc,
+                     thumbnail=server.icon_url,
+                     extra_fields=[])
+
     thanks_for_adding_msg = discord.Embed(title="",
                                           description=("**Thanks For Adding Me To " + str(server.name) + "**\n" + var_list.thanks_for_adding_msg_contents),
                                           colour=bot_embed_colour)
@@ -58,13 +80,20 @@ async def on_server_join(server):
                               embed=thanks_for_adding_msg)
 
 @client.event
+async def on_server_remove(server):
+    webhook_desc = "Left Server: **" + str(server) + "**"
+    send_webhook_log(description=webhook_desc,
+                     thumbnail=server.icon_url,
+                     extra_fields=[])
+
+@client.event
 async def playing_msg_loop():
     while True:
         await client.change_presence(game=discord.Game(name="Say y!help", type=1, url='https://twitch.tv/stshrewsburyDev'))
         await asyncio.sleep(8)
         await client.change_presence(game=discord.Game(name="Made With discord.py", type=1, url='https://twitch.tv/stshrewsburyDev'))
         await asyncio.sleep(8)
-        await client.change_presence(game=discord.Game(name=("With " + str(len(list(client.get_all_members()))) + " Users"), type=1, url='https://twitch.tv/stshrewsburyDev'))
+        await client.change_presence(game=discord.Game(name="Made By stshrewsburyDev", type=1, url='https://twitch.tv/stshrewsburyDev'))
         await asyncio.sleep(8)
         await client.change_presence(game=discord.Game(name=("In " + str(len(list(client.servers))) + " Server(s)"), type=1, url='https://twitch.tv/stshrewsburyDev'))
         await asyncio.sleep(8)
@@ -384,7 +413,7 @@ class bot_commands:
                              value="https://discord.io/stshrewsburyDev\n\n**Use If Above Doesnt Work:**\nhttps://discord.gg/QGMaFMf",
                              inline=False)
         invite_msg.add_field(name="Add Me To Your Server:",
-                             value="{Sorry But Due To The Bot Being In Development There Is No Public Link For This Bot}",
+                             value="https://discordapp.com/oauth2/authorize?client_id=431823873391198218&permissions=8&scope=bot",
                              inline=False)
         await client.say(embed=invite_msg)
 
@@ -1010,7 +1039,7 @@ class fun_commands:
                                                  colour=bot_embed_colour)
                 horse_racing_msg.set_author(name="Horse Racing:",
                                             icon_url=client.user.avatar_url)
-                await client.say(horse_racing_msg_msg, embed=horse_racing_msg)
+                await client.edit_message(horse_racing_msg_msg, embed=horse_racing_msg)
 
             else:
                 horse_racing_msg = discord.Embed(title="",
@@ -1018,7 +1047,7 @@ class fun_commands:
                                                  colour=bot_embed_colour)
                 horse_racing_msg.set_author(name="Horse Racing:",
                                             icon_url=client.user.avatar_url)
-                await client.say(horse_racing_msg_msg, embed=horse_racing_msg)
+                await client.edit_message(horse_racing_msg_msg, embed=horse_racing_msg)
 
     @client.command(pass_context = True)
     async def rps(ctx, *, text: str=None):
