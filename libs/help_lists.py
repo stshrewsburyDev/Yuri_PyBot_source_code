@@ -21,7 +21,6 @@ general_help = """
 **y!analyse {Text}** - Analyses The Text
 **y!num2binary {Number}** - Returns The Binary Number
 **y!binary2num {Binary Number}** - Returns The Denary Number
-**y!urban {Search Term}** - Defines The Term Using The Urban Dictionary
 **y!slap {@Mention}** - Slaps That Person
 **y!avatar {Blank Or @Mention}** - Shows The Full Resolution Avatar Of Chosen Person, If Blank Shows Yours
 """
