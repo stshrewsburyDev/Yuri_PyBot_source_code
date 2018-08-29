@@ -5,13 +5,6 @@ Made By Steven Shrewsbury (AKA: stshrewsburyDev)
 
 bot_version = "1.0 Dev Build"
 
-middle_finger_command_images = ["https://stshrewsburydev.github.io/discord_bots_resources_site/yuri_pybot/images/middle_finger_command_images/middle_finger_1.gif",
-                        "https://stshrewsburydev.github.io/discord_bots_resources_site/yuri_pybot/images/middle_finger_command_images/middle_finger_2.png",
-                        "https://stshrewsburydev.github.io/discord_bots_resources_site/yuri_pybot/images/middle_finger_command_images/middle_finger_3.gif",
-                        "https://stshrewsburydev.github.io/discord_bots_resources_site/yuri_pybot/images/middle_finger_command_images/middle_finger_4.gif",
-                        "https://stshrewsburydev.github.io/discord_bots_resources_site/yuri_pybot/images/middle_finger_command_images/middle_finger_5.gif"
-                        ]
-
 dance_command_images = ["https://stshrewsburydev.github.io/discord_bots_resources_site/yuri_pybot/images/dance_command_images/yuri_dancing_1.gif",
                 "https://stshrewsburydev.github.io/discord_bots_resources_site/yuri_pybot/images/dance_command_images/yuri_dancing_2.gif",
                 "https://stshrewsburydev.github.io/discord_bots_resources_site/yuri_pybot/images/dance_command_images/yuri_dancing_3.gif"
