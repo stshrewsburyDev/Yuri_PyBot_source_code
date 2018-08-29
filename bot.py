@@ -114,16 +114,6 @@ async def on_command_error(error,
                                   embed=cooldown)
         return
 
-    elif isinstance(error, commands.CommandNotFound):
-        no_command = discord.Embed(title="",
-                                   description="Unkown Command. Use **y!help** To See All Commands",
-                                   colour=bot_error_embed_colour)
-        no_command.set_author(name="UNKNOWN COMMAND ERROR:",
-                              icon_url=client.user.avatar_url)
-        await client.send_message(ctx.message.channel,
-                                  embed=no_command)
-        return
-
     else:
         ERROR(error)
 
