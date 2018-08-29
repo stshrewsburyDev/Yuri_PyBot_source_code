@@ -137,7 +137,7 @@ def re_draw_horse_race(horse_1, horse_2, horse_3, horse_4):
     race += ":horse_racing:"
     for x in range(horse_1, 10):
         race += ":black_circle:"
-    race += "\n"
+    race += ":triangular_flag_on_post: \n"
 
     race += ":two: - "
     for x in range(0, horse_2):
@@ -145,7 +145,7 @@ def re_draw_horse_race(horse_1, horse_2, horse_3, horse_4):
     race += ":horse_racing:"
     for x in range(horse_2, 10):
         race += ":black_circle:"
-    race += "\n"
+    race += ":triangular_flag_on_post: \n"
 
     race += ":three: - "
     for x in range(0, horse_3):
@@ -153,7 +153,7 @@ def re_draw_horse_race(horse_1, horse_2, horse_3, horse_4):
     race += ":horse_racing:"
     for x in range(horse_3, 10):
         race += ":black_circle:"
-    race += "\n"
+    race += ":triangular_flag_on_post: \n"
 
     race += ":four: - "
     for x in range(0, horse_4):
@@ -161,6 +161,6 @@ def re_draw_horse_race(horse_1, horse_2, horse_3, horse_4):
     race += ":horse_racing:"
     for x in range(horse_4, 10):
         race += ":black_circle:"
-    race += "\nPlease Wait..."
+    race += ":triangular_flag_on_post: \nPlease Wait..."
 
     return race
