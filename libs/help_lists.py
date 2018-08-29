@@ -48,7 +48,6 @@ admin_help = """
 
 fun_help = """
 **y!dance** - Self Explanitory
-**y!middle_finger** - Self Explanitory
 **y!dice_roll** - Rolls The Dice
 **y!fruit_machine** - Spins The Fruit Machiene
 **y!horse_race {1 - 4}** - See If The Number Horse You Picked Can Make It To The End First
