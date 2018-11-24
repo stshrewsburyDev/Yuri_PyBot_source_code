@@ -603,6 +603,8 @@ class server_commands:
                         first_one = False
                     else:
                         formatted_roles += ", " + str(_role_.mention)
+            if formatted_roles == "":
+                formatted_roles = "User has no roles :|"
 
             stats_msg = discord.Embed(title="",
                                       description="",
