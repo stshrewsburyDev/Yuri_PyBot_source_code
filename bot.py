@@ -117,6 +117,10 @@ async def on_command_error(error,
     else:
         ERROR(error)
 
+@client.command()
+async def SayYes():
+    await client.say("yes")
+        
 class help_commands:
     @commands.cooldown(1, 10, commands.BucketType.user)
     @client.command(pass_context = True)
