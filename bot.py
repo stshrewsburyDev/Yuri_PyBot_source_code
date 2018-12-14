@@ -359,6 +359,15 @@ class bot_commands:
                                icon_url=client.user.avatar_url)
         await client.delete_message(ping_msg)
         await client.say(embed=latency_msg)
+    
+    @client.command(pass_context = True)
+    async def uptime():
+        if str(ctx.message.author.id) == "312984580745330688":
+            await client.say((str(bot_launch_time_string) + "\n" + str(bot_launch_date_string)))
+            return
+        else:
+            await client.say("Bot owner command only, Sorry :(")
+            return
 
     @client.command(pass_context = True)
     async def invite():
