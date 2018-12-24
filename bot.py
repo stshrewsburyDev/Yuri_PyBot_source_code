@@ -10,7 +10,7 @@ INFO("setting things up, please wait...")
 DEBUG("importing needed libraries...")
 from discord.ext import commands
 from discord.ext.commands import Bot
-import discord, asyncio, os, time, random, platform, requests, json
+import discord, asyncio, os, time, random, platform, requests, json, youtube_dl
 INFO("task complete")
 
 DEBUG("setting up custom libraries...")
