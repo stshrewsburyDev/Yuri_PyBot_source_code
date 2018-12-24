@@ -54,3 +54,17 @@ fun_help = """
 **y!say {Text}** - I Will Repeat The Message To You
 **y!say_emoji {Text}** - I Will Repeat The Message To You In Emoji Form To the Best Of My Abilities
 """
+
+music_help = """
+**y!!YouTube {Search query}** - YouTube video search under search query
+
+**Music bot commands:**
+**y!join** - Joins to the voice channel your in
+**y!leave** - Leaves the current voice channel the bot is in
+**y!play {URL | Search query}** - Adds the request to the queue
+**y!pause** - Pauses the player
+**y!resume** - Resumes the player
+**y!stop** - Stops the player and clears the queue
+**y!skip** - Skipps the current song
+**y!np** - Shows the current playing song
+"""

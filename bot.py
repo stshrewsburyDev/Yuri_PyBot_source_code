@@ -10,10 +10,11 @@ INFO("setting things up, please wait...")
 DEBUG("importing needed libraries...")
 from discord.ext import commands
 from discord.ext.commands import Bot
-import discord, asyncio, os, time, random, platform, requests
+import discord, asyncio, os, time, random, platform, requests, json
 INFO("task complete")
 
 DEBUG("setting up custom libraries...")
+import libs.YouTubeAPI as YouTubeAPI
 import libs.help_lists as h_lists
 import libs.vars_lists as var_list
 import libs.utils as utils
@@ -21,12 +22,18 @@ INFO("task complete")
 
 DEBUG("setting up client...")
 BOT_TOKEN = str(os.environ.get("BOT_TOKEN"))
-BOT_LOG_WEBHOOK_URL = str(os.environ.get("BOT_LOG_WEBHOOK_URL"))
+BOT_LOG_WEBHOOK_URL = str(os.environ.get("BotLogWebhookURL"))
 Client = discord.Client()
-client = commands.Bot(command_prefix="y!")
+client = commands.Bot(command_prefix=str(os.environ.get("BotPrefix")))
 client.remove_command("help")
 bot_embed_colour = discord.colour.Colour.dark_purple()
 bot_error_embed_colour = discord.colour.Colour.dark_red()
+
+global queues
+global players
+queues = {}
+players = {}
+PlayerLoops = {}
 
 bot_launch_time = time.time()
 bot_launch_time_string = str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S"))
@@ -99,7 +106,7 @@ async def playing_msg_loop():
         await asyncio.sleep(8)
         await client.change_presence(game=discord.Game(name=("With Pens (And Knives)"), type=1, url='https://twitch.tv/stshrewsburyDev'))
         await asyncio.sleep(8)
-
+"""
 @client.event
 async def on_command_error(error,
                            ctx
@@ -116,7 +123,7 @@ async def on_command_error(error,
 
     else:
         ERROR(error)
-        
+"""
 class help_commands:
     @commands.cooldown(1, 10, commands.BucketType.user)
     @client.command(pass_context = True)
@@ -177,6 +184,18 @@ class help_commands:
         f_help_msg.set_author(name="Fun Help:",
                               icon_url=client.user.avatar_url)
         await client.say(embed=f_help_msg)
+
+    @commands.cooldown(1, 10, commands.BucketType.user)
+    @client.command(pass_context = True)
+    async def help_music():
+        m_help_msg = discord.Embed(title=h_lists.notice,
+                                   description=h_lists.music_help,
+                                   colour=bot_embed_colour)
+        m_help_msg.set_author(name="Music Help:",
+                              icon_url=client.user.avatar_url)
+        await client.say(embed=m_help_msg)
+
+
 
 class general_commands:
     @client.command(pass_context = True)
@@ -359,9 +378,9 @@ class bot_commands:
                                icon_url=client.user.avatar_url)
         await client.delete_message(ping_msg)
         await client.say(embed=latency_msg)
-    
+
     @client.command(pass_context = True)
-    async def uptime():
+    async def uptime(ctx):
         if str(ctx.message.author.id) == "312984580745330688":
             await client.say((str(bot_launch_time_string) + "\n" + str(bot_launch_date_string)))
             return
@@ -731,9 +750,11 @@ class admin_commands:
                                                               colour=bot_embed_colour)
                         youve_been_kicked_msg.set_author(name="You Have Been Kicked From A Server:",
                                                          icon_url=client.user.avatar_url)
-                        await client.send_message(user,
-                                                  embed=youve_been_kicked_msg)
-
+                        try:
+                            await client.send_message(user,
+                                                      embed=youve_been_kicked_msg)
+                        except:
+                            pass
                     except discord.errors.Forbidden:
                         kick_failed_msg = discord.Embed(title="",
                                                         description="Sorry Either I Am In A Role Below The Specified User Or I Do Not Have The Correct Perms To Perform This Command",
@@ -798,9 +819,12 @@ class admin_commands:
                                                               colour=bot_embed_colour)
                         youve_been_banned_msg.set_author(name="You Have Been Banned From A Server:",
                                                          icon_url=client.user.avatar_url)
-                        await client.send_message(user,
-                                                  embed=youve_been_banned_msg)
-
+                        try:
+                            await client.send_message(user,
+                                                      embed=youve_been_banned_msg)
+                        except:
+                            pass
+                        return
                     except discord.errors.Forbidden:
                         ban_failed_msg = discord.Embed(title="",
                                                         description="Sorry Either I Am In A Role Below The Specified User Or I Do Not Have The Correct Perms To Perform This Command",
@@ -809,6 +833,7 @@ class admin_commands:
                                                    icon_url=client.user.avatar_url)
                         await client.say(embed=ban_failed_msg)
                         return
+            return
         else:
             no_perms_msg = discord.Embed(title="",
                                          description="Sorry You Dont Have The Right Perms To Perform this Action.\n\nYou Need Permission: Ban Members/Administrator",
@@ -816,6 +841,7 @@ class admin_commands:
             no_perms_msg.set_author(name="No Correct Perms:",
                                     icon_url=client.user.avatar_url)
             await client.say(embed=no_perms_msg)
+            return
 
     @client.command(pass_context = True)
     async def warn(ctx, user: discord.Member = None, *, text: str=None):
@@ -864,8 +890,11 @@ class admin_commands:
                                                           colour=bot_embed_colour)
                     youve_been_warned_msg.set_author(name="You Have Been Warned From A Server:",
                                                      icon_url=client.user.avatar_url)
-                    await client.send_message(user,
-                                              embed=youve_been_warned_msg)
+                    try:
+                        await client.send_message(user,
+                                                  embed=youve_been_warned_msg)
+                    except:
+                        pass
 
         else:
             no_perms_msg = discord.Embed(title="",
@@ -1120,5 +1149,277 @@ class fun_commands:
                                       colour=bot_embed_colour)
         say_emoji_msg.set_author(name="Say Emoji Response:")
         await client.say(embed=say_emoji_msg)
+
+class music_bot_commands:
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    @client.command(pass_context = True, aliases=["Youtube", "youtube", "youTube", "YT", "yt", "Yt", "yT"])
+    async def YouTube(ctx, *, arg=None):
+        if arg is None:
+            await client.say(embed=discord.Embed(title="Arguments missing error:",
+                                                 description="Please define a search term: eg: ``y!YouTube stshrewsburyDev``",
+                                                 color=bot_error_embed_colour))
+            return
+        else:
+            YouTubeSearchResults = YouTubeAPI.get_videos(DEV_KEY=str(os.environ.get("YouTubeDataAPIKey")),
+                                                         search_query=str(arg),
+                                                         max_results=10)
+            if len(YouTubeSearchResults) == 0:
+                await client.say(embed=discord.Embed(title="YouTube search error:",
+                                                     description="There are no search results for this query, Chekck the spelling and try again in 5 seconds.",
+                                                     color=bot_error_embed_colour))
+                return
+            else:
+                await client.say(str("https://youtube.com/watch?v=" + str(YouTubeSearchResults[0]["id"]["videoId"])))
+
+    class MusicBot:
+        def CheckQueue(server):
+            try:
+                ServerQueue = queues[server.id]
+            except:
+                pass
+
+            try:
+                CurrentSongCompleted = players[server.id].is_done()
+            except:
+                CurrentSongCompleted = True
+
+            if CurrentSongCompleted == True:
+                if ServerQueue != []:
+                    player = ServerQueue.pop(0)
+                    queues[server.id] = ServerQueue
+                    players[server.id] = player
+                    player.start()
+
+        def CheckForDJRole(user):
+            try:
+                UserRoles = user.roles
+                for UserRole in UserRoles:
+                    if str(UserRole.name).lower() == "dj":
+                        return True
+                return False
+            except:
+                return False
+
+        @commands.cooldown(1, 5, commands.BucketType.user)
+        @client.command(pass_context = True)
+        async def join(ctx):
+            VoiceChannel = ctx.message.author.voice_channel
+            try:
+                await client.join_voice_channel(VoiceChannel)
+                JoinMessage = discord.Embed(description=str("Joined voice channel: ``" + str(VoiceChannel) + "``"),
+                                            color=bot_embed_colour)
+                JoinMessage.set_author(name="Joined channel:",
+                                       icon_url=client.user.avatar_url)
+                await client.say(embed=JoinMessage)
+                return
+            except:
+                JoinMessage = discord.Embed(description="Failed to join voice channel.\n\nThis may caused by:\n**1.** I do not have permission to that channel\n**2.** There is no channel for me to join (Join a channel first)",
+                                            color=bot_error_embed_colour)
+                JoinMessage.set_author(name="Error joining channel:",
+
+                                       icon_url=client.user.avatar_url)
+                await client.say(embed=JoinMessage)
+                return
+
+        @commands.cooldown(1, 5, commands.BucketType.user)
+        @client.command(pass_context = True)
+        async def leave(ctx):
+            VoiceChannelServer = ctx.message.server
+            try:
+                VoiceChannel = client.voice_client_in(VoiceChannelServer)
+                await VoiceChannel.disconnect()
+                LeaveMessage = discord.Embed(description=str("Left voice channel"),
+                                             color=bot_embed_colour)
+                LeaveMessage.set_author(name="Left channel:",
+                                        icon_url=client.user.avatar_url)
+                await client.say(embed=LeaveMessage)
+                return
+            except:
+                LeaveMessage = discord.Embed(description="Failed to leave voice channel.\n\nThis may caused by:\n**1.** There is no channel for me to leave (I must be in a channel first)",
+                                             color=bot_error_embed_colour)
+                LeaveMessage.set_author(name="Error leaving channel:",
+                                        icon_url=client.user.avatar_url)
+                await client.say(embed=LeaveMessage)
+                return
+
+        @commands.cooldown(1, 5, commands.BucketType.user)
+        @client.command(pass_context = True)
+        async def play(ctx, *, arg=None):
+            VoiceChannelServer = ctx.message.server
+            VoiceChannel = client.voice_client_in(VoiceChannelServer)
+
+            if arg is None:
+                VoiceChannel = None
+
+            if VoiceChannel is not None:
+                PlayMessageSend = await client.say(str("Searching for: ``" + str(arg) + "``"))
+                try:
+                    player = await VoiceChannel.create_ytdl_player(arg)
+                    del player
+                    TrackToPlay = arg
+
+                except:
+                    VideoSearch = YouTubeAPI.get_videos(DEV_KEY=str(os.environ.get("YouTubeDataAPIKey")),
+                                                        search_query=str(arg),
+                                                        max_results=15)
+                    if len(VideoSearch) is 0:
+                        TrackToPlay = None
+                    else:
+                        TrackToPlay = "https://youtube.com/watch?v=" + str(VideoSearch[0]["id"]["videoId"])
+
+                try:
+                    player = await VoiceChannel.create_ytdl_player(TrackToPlay,
+                                                                   after=lambda: music_bot_commands.MusicBot.CheckQueue(VoiceChannelServer)
+                                                                   )
+
+                    if player.is_live != False:
+                        x = int(jdja9dja9jd90djj8j8934r8942uvrq892u)
+                        # I know the above is a dumb way to make python return an error,
+                        # but ive been coding for a long time now and this is the only
+                        # way my brain tells me to do this. I seriously need a break.
+                        # Like even 5 mins would be great. Oh well back on with development
+                        # I guess.
+
+                    if VoiceChannelServer.id in queues:
+                        ServerQueue = queues[VoiceChannelServer.id]
+                        ServerQueue.append(player)
+                        queues[VoiceChannelServer.id] = ServerQueue
+                    else:
+                        ServerQueue = []
+                        ServerQueue.append(player)
+                        queues[VoiceChannelServer.id] = ServerQueue
+
+                    music_bot_commands.MusicBot.CheckQueue(VoiceChannelServer)
+
+                    PlayMessage = discord.Embed(description=str("``" + str(arg) + "`` has been added to the queue"),
+                                                color=bot_embed_colour)
+                    PlayMessage.set_author(name="Player info:",
+                                           icon_url=client.user.avatar_url)
+                    await client.edit_message(PlayMessageSend, embed=PlayMessage)
+                    return
+                except:
+                    PlayMessage = discord.Embed(description="Song could not be added to the queue\n\nThis could be caused by:\n**1.** The video requested has denied access to be played in voice channels\n**2.** The player couldnt find any video matching that query\n**3.** The request is a live-stream (Streams are not supported, Sorry)\nCheck the query spelling and try again",
+                                                color=bot_error_embed_colour)
+                    PlayMessage.set_author(name="Player error:",
+                                           icon_url=client.user.avatar_url)
+                    await client.edit_message(PlayMessageSend, embed=PlayMessage)
+                    return
+            else:
+                PlayMessage = discord.Embed(description="Could not play music.\n\nThis may be caused by:\n**1.** I am not in a Voice channel.\n**2.** No music was defined add a search term or URL Eg: ``y!play stshrewsburyDev`` or ``y!play https://youtube.com/watch?v=########``",
+                                            color=bot_error_embed_colour)
+                PlayMessage.set_author(name="Error playing music:",
+                                       icon_url=client.user.avatar_url)
+                await client.say(embed=PlayMessage)
+                return
+
+        @commands.cooldown(1, 5, commands.BucketType.user)
+        @client.command(pass_context = True)
+        async def pause(ctx):
+            VoiceChannelServer = ctx.message.server
+            VoiceChannel = client.voice_client_in(VoiceChannelServer)
+            try:
+                players[VoiceChannelServer.id].pause()
+                await client.say(embed=discord.Embed(description="Player paused",
+                                                     color=bot_embed_colour))
+                return
+            except:
+                await client.say(embed=discord.Embed(description="Player could not be paused",
+                                                     color=bot_error_embed_colour))
+                return
+
+        @commands.cooldown(1, 5, commands.BucketType.user)
+        @client.command(pass_context = True, aliases=["unpause"])
+        async def resume(ctx):
+            VoiceChannelServer = ctx.message.server
+            VoiceChannel = client.voice_client_in(VoiceChannelServer)
+            try:
+                players[VoiceChannelServer.id].resume()
+                await client.say(embed=discord.Embed(description="Player resumed",
+                                                     color=bot_embed_colour))
+                return
+            except:
+                await client.say(embed=discord.Embed(description="Player could not be resumed",
+                                                     color=bot_error_embed_colour))
+                return
+
+        @commands.cooldown(1, 5, commands.BucketType.user)
+        @client.command(pass_context = True)
+        async def stop(ctx):
+            VoiceChannelServer = ctx.message.server
+            VoiceChannel = client.voice_client_in(VoiceChannelServer)
+            try:
+                if music_bot_commands.MusicBot.CheckForDJRole(ctx.message.author) is True:
+                    players[VoiceChannelServer.id].stop()
+                    try:
+                        queues[VoiceChannelServer.id] = []
+                    except:
+                        pass
+                        await client.say(embed=discord.Embed(description="Player stopped, queue was cleared",
+                                                             color=bot_embed_colour))
+                        return
+                else:
+                    await client.say(embed=discord.Embed(description="You do not have sufficiant permissions to perform this action.\nYou need a role called ``DJ``",
+                                                         color=bot_error_embed_colour))
+                    return
+            except:
+                await client.say(embed=discord.Embed(description="Player could not be stopped",
+                                                     color=bot_error_embed_colour))
+                return
+
+        @commands.cooldown(1, 5, commands.BucketType.user)
+        @client.command(pass_context = True)
+        async def skip(ctx):
+            VoiceChannelServer = ctx.message.server
+            VoiceChannel = client.voice_client_in(VoiceChannelServer)
+            try:
+                if music_bot_commands.MusicBot.CheckForDJRole(ctx.message.author) is True:
+                    players[VoiceChannelServer.id].stop()
+                    music_bot_commands.MusicBot.CheckQueue(VoiceChannelServer)
+                    await client.say(embed=discord.Embed(description="Skipped current track",
+                                                         color=bot_embed_colour))
+                    return
+                else:
+                    await client.say(embed=discord.Embed(description="You do not have sufficiant permissions to perform this action.\nYou need a role called ``DJ``",
+                                                         color=bot_error_embed_colour))
+                    return
+            except:
+                await client.say(embed=discord.Embed(description="Could not skip the current track",
+                                                     color=bot_error_embed_colour))
+                return
+
+        @commands.cooldown(1, 5, commands.BucketType.user)
+        @client.command(pass_context = True, aliases=["NP", "Np", "nP", "nowplaying", "Nowplaying", "NowPlaying", "nowPlaying"])
+        async def np(ctx):
+            VoiceChannelServer = ctx.message.server
+            VoiceChannel = client.voice_client_in(VoiceChannelServer)
+            try:
+                player = players[VoiceChannelServer.id]
+                NowPlayingMsg = discord.Embed(color=bot_embed_colour)
+                NowPlayingMsg.set_author(name="Now playing...",
+                                         icon_url=client.user.avatar_url)
+                NowPlayingMsg.add_field(name="Title:",
+                                        value=str(player.title),
+                                        inline=False)
+                NowPlayingMsg.add_field(name="URL:",
+                                        value=str(player.url),
+                                        inline=False)
+                NowPlayingMsg.add_field(name="Duration:",
+                                        value=str(time.strftime("%H:%M:%S", time.gmtime(player.duration))),
+                                        inline=False)
+                NowPlayingMsg.add_field(name="Views:",
+                                        value=str(player.duration),
+                                        inline=True)
+                NowPlayingMsg.add_field(name="Video likes:",
+                                        value=str(player.likes),
+                                        inline=False)
+                NowPlayingMsg.add_field(name="Owner/Author:",
+                                        value=str(player.uploader),
+                                        inline=False)
+                await client.say(embed=NowPlayingMsg)
+                return
+            except:
+                await client.say(embed=discord.Embed(description="No currently playing track",
+                                                     color=bot_error_embed_colour))
+                return
 
 client.run(BOT_TOKEN)
