@@ -106,7 +106,7 @@ async def playing_msg_loop():
         await asyncio.sleep(8)
         await client.change_presence(game=discord.Game(name=("With Pens (And Knives)"), type=1, url='https://twitch.tv/stshrewsburyDev'))
         await asyncio.sleep(8)
-"""
+
 @client.event
 async def on_command_error(error,
                            ctx
@@ -122,8 +122,8 @@ async def on_command_error(error,
         return
 
     else:
-        ERROR(error)
-"""
+        print(error)
+
 class help_commands:
     @commands.cooldown(1, 10, commands.BucketType.user)
     @client.command(pass_context = True)
