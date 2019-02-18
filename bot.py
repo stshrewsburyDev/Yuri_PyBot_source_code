@@ -10,7 +10,7 @@ INFO("setting things up, please wait...")
 DEBUG("importing needed libraries...")
 from discord.ext import commands
 from discord.ext.commands import Bot
-import discord, asyncio, os, time, random, platform, requests, json, youtube_dl, psutil
+import discord, asyncio, os, time, random, platform, requests, json, youtube_dl
 INFO("task complete")
 
 DEBUG("setting up custom libraries...")
@@ -207,10 +207,6 @@ class general_commands:
                             icon_url=client.user.avatar_url)
         await client.say(embed=joke_msg)
        
-    @client.command()
-    async def qwerty():
-        await client.say(str(psutil.virtual_memory()))
-
     @client.command(pass_context = True)
     async def rip(ctx, name: str=None, *, text: str=None):
         rip_msg = discord.Embed(title="",
