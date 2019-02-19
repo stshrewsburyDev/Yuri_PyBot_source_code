@@ -10,7 +10,7 @@ INFO("setting things up, please wait...")
 DEBUG("importing needed libraries...")
 from discord.ext import commands
 from discord.ext.commands import Bot
-import discord, asyncio, os, time, random, platform, requests, json, youtube_dl
+import discord, asyncio, os, time, random, platform, requests, json
 INFO("task complete")
 
 DEBUG("setting up custom libraries...")
@@ -107,6 +107,13 @@ async def playing_msg_loop():
         await client.change_presence(game=discord.Game(name=("With Pens (And Knives)"), type=1, url='https://twitch.tv/stshrewsburyDev'))
         await asyncio.sleep(8)
 
+@cliemt.event
+async def on_message(message):
+    if message.author.bot is True:
+        pass
+    else:
+        await client.process_commands(message)
+
 @client.event
 async def on_command_error(error,
                            ctx
@@ -122,7 +129,7 @@ async def on_command_error(error,
         return
 
     else:
-        print(error)
+        ERROR(error)
 
 class help_commands:
     @commands.cooldown(1, 10, commands.BucketType.user)
@@ -206,7 +213,7 @@ class general_commands:
         joke_msg.set_author(name="Joke:",
                             icon_url=client.user.avatar_url)
         await client.say(embed=joke_msg)
-       
+
     @client.command(pass_context = True)
     async def rip(ctx, name: str=None, *, text: str=None):
         rip_msg = discord.Embed(title="",
@@ -1267,8 +1274,7 @@ class music_bot_commands:
                     else:
                         TrackToPlay = "https://youtube.com/watch?v=" + str(VideoSearch[0]["id"]["videoId"])
 
-                """try:"""
-                if 1 == 1:
+                try:
                     player = await VoiceChannel.create_ytdl_player(TrackToPlay,
                                                                    after=lambda: music_bot_commands.MusicBot.CheckQueue(VoiceChannelServer)
                                                                    )
@@ -1298,14 +1304,13 @@ class music_bot_commands:
                                            icon_url=client.user.avatar_url)
                     await client.edit_message(PlayMessageSend, embed=PlayMessage)
                     return
-                """
                 except:
                     PlayMessage = discord.Embed(description="Song could not be added to the queue\n\nThis could be caused by:\n**1.** The video requested has denied access to be played in voice channels\n**2.** The player couldnt find any video matching that query\n**3.** The request is a live-stream (Streams are not supported, Sorry)\nCheck the query spelling and try again",
                                                 color=bot_error_embed_colour)
                     PlayMessage.set_author(name="Player error:",
                                            icon_url=client.user.avatar_url)
                     await client.edit_message(PlayMessageSend, embed=PlayMessage)
-                    return"""
+                    return
             else:
                 PlayMessage = discord.Embed(description="Could not play music.\n\nThis may be caused by:\n**1.** I am not in a Voice channel.\n**2.** No music was defined add a search term or URL Eg: ``y!play stshrewsburyDev`` or ``y!play https://youtube.com/watch?v=########``",
                                             color=bot_error_embed_colour)
