@@ -1298,11 +1298,14 @@ class music_bot_commands:
 
                     music_bot_commands.MusicBot.CheckQueue(VoiceChannelServer)
 
-                    PlayMessage = discord.Embed(description=str("``" + str(arg) + "`` has been added to the queue"),
-                                                color=bot_embed_colour)
-                    PlayMessage.set_author(name="Player info:",
-                                           icon_url=client.user.avatar_url)
-                    await client.edit_message(PlayMessageSend, embed=PlayMessage)
+                    try:
+                        PlayMessage = discord.Embed(description=str("``" + str(arg) + "`` has been added to the queue"),
+                                                    color=bot_embed_colour)
+                        PlayMessage.set_author(name="Player info:",
+                                               icon_url=client.user.avatar_url)
+                        await client.edit_message(PlayMessageSend, embed=PlayMessage)
+                    except:
+                        await client.edit_message(PlayMessageSend, "Added")
                     return
                 except:
                     PlayMessage = discord.Embed(description="Song could not be added to the queue\n\nThis could be caused by:\n**1.** The video requested has denied access to be played in voice channels\n**2.** The player couldnt find any video matching that query\n**3.** The request is a live-stream (Streams are not supported, Sorry)\nCheck the query spelling and try again",
