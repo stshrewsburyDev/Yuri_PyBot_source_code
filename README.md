@@ -1,4 +1,5 @@
 # Yuri PyBot Source Code
+[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
 The Source Code For Yuri PyBot Used By Heroku To Host The Bot.
 NOTICE: This code is extremely bad and the layout is terrible. I make way better looking code now and I may do a re-write of this bot in the future, sorry if you are using this as reference or anything :D
 
