@@ -466,6 +466,10 @@ class bot_commands:
         bot_info_m.add_field(name="Host Operating System:",
                              value='{} {} | {}'.format(platform.system(), platform.release(), platform.version()),
                              inline=False)
+        
+        bot_info_m.add_field(name="Host CPU:",
+                             value='{}'.format(platform.processor()),
+                             inline=False)
 
         await client.say(embed=bot_info_m)
 
