@@ -10,7 +10,7 @@ INFO("setting things up, please wait...")
 DEBUG("importing needed libraries...")
 from discord.ext import commands
 from discord.ext.commands import Bot
-import discord, asyncio, os, time, random, platform, requests, json
+import discord, asyncio, os, time, random, platform, requests, json, cpuinfo
 INFO("task complete")
 
 DEBUG("setting up custom libraries...")
@@ -28,6 +28,8 @@ client = commands.Bot(command_prefix=str(os.environ.get("BotPrefix")))
 client.remove_command("help")
 bot_embed_colour = discord.colour.Colour.dark_purple()
 bot_error_embed_colour = discord.colour.Colour.dark_red()
+
+cpuInfo = json.loads(cpuinfo.get_cpu_info_json())
 
 global queues
 global players
@@ -468,7 +470,7 @@ class bot_commands:
                              inline=False)
         
         bot_info_m.add_field(name="Host CPU:",
-                             value='{}'.format(platform.processor()),
+                             value='{}'.format(cpuInfo["brand"]),
                              inline=False)
 
         await client.say(embed=bot_info_m)
