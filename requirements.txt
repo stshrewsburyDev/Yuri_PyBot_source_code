@@ -1,5 +1,6 @@
 discord
 asyncio
+py-cpuinfo
 requests
 google-api-python-client
 git+https://github.com/Rapptz/discord.py@rewrite#egg=discord.py[voice]
