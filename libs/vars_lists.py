@@ -3,7 +3,7 @@ Variables And Lists For Yuri PyBot
 Made By Steven Shrewsbury (AKA: stshrewsburyDev)
 """
 
-bot_version = "2.0"
+bot_version = "4.6 testing build"
 
 dance_command_images = ["https://stshrewsburydev.github.io/discord_bots_resources_site/yuri_pybot/images/dance_command_images/yuri_dancing_1.gif",
                 "https://stshrewsburydev.github.io/discord_bots_resources_site/yuri_pybot/images/dance_command_images/yuri_dancing_2.gif",
