@@ -16,6 +16,9 @@ The new rewrite will use ``cogs`` to be able to enhance the performance of the b
 
 Also the commands under the ``class MusicBot:`` do not work very well and I am going to try and make them work better than they currently do. (these are lines 1181-1433)
 
+___UPDATE:___
+The music ```y!play URL/searchTerm``` was failing to work as I was using a outdated youtube_dl client version, note to self: "make sure to update your stuff :D"
+
 If you are currently looking for a music bot command feature, consider looking at the official ``discord.py`` repository [here](https://github.com/Rapptz/discord.py) for the source code of ``discord.py``
 
 Or you can go to an example by Rapptz (the developer of ``discord.py``) of a music function [here!](https://github.com/Rapptz/discord.py/blob/rewrite/examples/basic_voice.py)
