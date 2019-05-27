@@ -1267,7 +1267,7 @@ class music_bot_commands:
             if VoiceChannel is not None:
                 PlayMessageSend = await client.say(str("Searching for: ``" + str(arg) + "``"))
                 try:
-                    player = await VoiceChannel.create_ytdl_player(arg)
+                    player = await VoiceChannel.create_ytdl_player(arg, before_options="-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5")
                     del player
                     TrackToPlay = arg
 
@@ -1282,7 +1282,8 @@ class music_bot_commands:
 
                 try:
                     player = await VoiceChannel.create_ytdl_player(TrackToPlay,
-                                                                   after=lambda: music_bot_commands.MusicBot.CheckQueue(VoiceChannelServer)
+                                                                   after=lambda: music_bot_commands.MusicBot.CheckQueue(VoiceChannelServer),
+                                                                   before_options="-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5"
                                                                    )
 
                     if player.is_live != False:
