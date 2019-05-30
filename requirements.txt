@@ -1,9 +1,9 @@
 discord==0.16.12
+discord.py[voice]
 asyncio
 py-cpuinfo
 requests
 google-api-python-client
-git+https://github.com/Rapptz/discord.py@rewrite#egg=discord.py[voice]
 pip
 aiohttp ~= 2.3.10
 websockets
