@@ -405,7 +405,7 @@ class bot_commands:
         invite_msg.set_author(name="Invite Links:",
                               icon_url=client.user.avatar_url)
         invite_msg.add_field(name="My Developers Server:",
-                             value="https://discord.io/stshrewsburyDev\n\n**Use If Above Doesnt Work:**\nhttps://discord.gg/QGMaFMf",
+                             value="https://discord.io/stshrewsburyDev\n\n**Use If Above Doesnt Work:**\nhttps://discord.gg/V76hSrV",
                              inline=False)
         invite_msg.add_field(name="Add Me To Your Server:",
                              value="https://discordapp.com/oauth2/authorize?client_id=431823873391198218&permissions=8&scope=bot",
