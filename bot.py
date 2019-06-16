@@ -18,6 +18,7 @@ import libs.YouTubeAPI as YouTubeAPI
 import libs.help_lists as h_lists
 import libs.vars_lists as var_list
 import libs.utils as utils
+import libs.app
 INFO("task complete")
 
 DEBUG("setting up client...")
