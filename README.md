@@ -21,7 +21,7 @@ The music ```y!play URL/searchTerm``` was failing to work as I was using a outda
 
 If you are currently looking for a music bot command feature, consider looking at the official ``discord.py`` repository [here](https://github.com/Rapptz/discord.py) for the source code of ``discord.py``
 
-Or you can go to an example by Rapptz (the developer of ``discord.py``) of a music function [here!](https://github.com/Rapptz/discord.py/blob/rewrite/examples/basic_voice.py)
+Or you can go to an example by Rapptz (the developer of ``discord.py``) of a music function [here!](https://github.com/Rapptz/discord.py/blob/master/examples/basic_voice.py)
 
 ### The Bot's Home/Support Server:
 https://discord.io/stshrewsburyDev
