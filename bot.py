@@ -1439,7 +1439,7 @@ class music_bot_commands:
                 NowPlayingMsg.add_field(name="Owner/Author:",
                                         value=str(player.uploader),
                                         inline=False)
-                NowPlayingMsg.set_footer(test="NOTICE: These music commands are in BETA and may break")
+                NowPlayingMsg.set_footer(text="NOTICE: These music commands are in BETA and may break")
                 await client.say(embed=NowPlayingMsg)
                 return
             except Exception as error:
