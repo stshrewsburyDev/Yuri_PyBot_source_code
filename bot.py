@@ -1442,7 +1442,8 @@ class music_bot_commands:
                 NowPlayingMsg.set_footer(test="NOTICE: These music commands are in BETA and may break")
                 await client.say(embed=NowPlayingMsg)
                 return
-            except:
+            except Exception as error:
+                ERROR(error)
                 await client.say(embed=discord.Embed(description="No currently playing track",
                                                      color=bot_error_embed_colour).set_footer(text="NOTICE: These music commands are in BETA and may break"))
                 return
