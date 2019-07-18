@@ -1223,7 +1223,7 @@ class music_bot_commands:
                                             color=bot_embed_colour)
                 JoinMessage.set_author(name="Joined channel:",
                                        icon_url=client.user.avatar_url)
-                JoinMessage.set_footer(test="NOTICE: These music commands are in BETA and may break")
+                JoinMessage.set_footer(text="NOTICE: These music commands are in BETA and may break")
                 await client.say(embed=JoinMessage)
                 return
             except:
@@ -1232,7 +1232,7 @@ class music_bot_commands:
                 JoinMessage.set_author(name="Error joining channel:",
 
                                        icon_url=client.user.avatar_url)
-                JoinMessage.set_footer(test="NOTICE: These music commands are in BETA and may break")
+                JoinMessage.set_footer(text="NOTICE: These music commands are in BETA and may break")
                 await client.say(embed=JoinMessage)
                 return
 
@@ -1247,7 +1247,7 @@ class music_bot_commands:
                                              color=bot_embed_colour)
                 LeaveMessage.set_author(name="Left channel:",
                                         icon_url=client.user.avatar_url)
-                LeaveMessage.set_footer(test="NOTICE: These music commands are in BETA and may break")
+                LeaveMessage.set_footer(text="NOTICE: These music commands are in BETA and may break")
                 await client.say(embed=LeaveMessage)
                 return
             except:
@@ -1255,7 +1255,7 @@ class music_bot_commands:
                                              color=bot_error_embed_colour)
                 LeaveMessage.set_author(name="Error leaving channel:",
                                         icon_url=client.user.avatar_url)
-                LeaveMessage.set_footer(test="NOTICE: These music commands are in BETA and may break")
+                LeaveMessage.set_footer(text="NOTICE: These music commands are in BETA and may break")
                 await client.say(embed=LeaveMessage)
                 return
 
@@ -1314,7 +1314,7 @@ class music_bot_commands:
                                                     color=bot_embed_colour)
                         PlayMessage.set_author(name="Player info:",
                                                icon_url=client.user.avatar_url)
-                        PlayMessage.set_footer(test="NOTICE: These music commands are in BETA and may break")
+                        PlayMessage.set_footer(text="NOTICE: These music commands are in BETA and may break")
                         await client.edit_message(PlayMessageSend, embed=PlayMessage)
                     except:
                         await client.edit_message(PlayMessageSend, "Added")
@@ -1324,7 +1324,7 @@ class music_bot_commands:
                                                 color=bot_error_embed_colour)
                     PlayMessage.set_author(name="Player error:",
                                            icon_url=client.user.avatar_url)
-                    PlayMessage.set_footer(test="NOTICE: These music commands are in BETA and may break")
+                    PlayMessage.set_footer(text="NOTICE: These music commands are in BETA and may break")
                     await client.edit_message(PlayMessageSend, embed=PlayMessage)
                     return
             else:
@@ -1332,7 +1332,7 @@ class music_bot_commands:
                                             color=bot_error_embed_colour)
                 PlayMessage.set_author(name="Error playing music:",
                                        icon_url=client.user.avatar_url)
-                PlayMessage.set_footer(test="NOTICE: These music commands are in BETA and may break")
+                PlayMessage.set_footer(text="NOTICE: These music commands are in BETA and may break")
                 await client.say(embed=PlayMessage)
                 return
 
@@ -1344,11 +1344,11 @@ class music_bot_commands:
             try:
                 players[VoiceChannelServer.id].pause()
                 await client.say(embed=discord.Embed(description="Player paused",
-                                                     color=bot_embed_colour).set_footer(test="NOTICE: These music commands are in BETA and may break"))
+                                                     color=bot_embed_colour).set_footer(text="NOTICE: These music commands are in BETA and may break"))
                 return
             except:
                 await client.say(embed=discord.Embed(description="Player could not be paused",
-                                                     color=bot_error_embed_colour).set_footer(test="NOTICE: These music commands are in BETA and may break"))
+                                                     color=bot_error_embed_colour).set_footer(text="NOTICE: These music commands are in BETA and may break"))
                 return
 
         @commands.cooldown(1, 5, commands.BucketType.user)
@@ -1359,11 +1359,11 @@ class music_bot_commands:
             try:
                 players[VoiceChannelServer.id].resume()
                 await client.say(embed=discord.Embed(description="Player resumed",
-                                                     color=bot_embed_colour).set_footer(test="NOTICE: These music commands are in BETA and may break"))
+                                                     color=bot_embed_colour).set_footer(text="NOTICE: These music commands are in BETA and may break"))
                 return
             except:
                 await client.say(embed=discord.Embed(description="Player could not be resumed",
-                                                     color=bot_error_embed_colour).set_footer(test="NOTICE: These music commands are in BETA and may break"))
+                                                     color=bot_error_embed_colour).set_footer(text="NOTICE: These music commands are in BETA and may break"))
                 return
 
         @commands.cooldown(1, 5, commands.BucketType.user)
@@ -1379,15 +1379,15 @@ class music_bot_commands:
                     except:
                         pass
                         await client.say(embed=discord.Embed(description="Player stopped, queue was cleared",
-                                                             color=bot_embed_colour).set_footer(test="NOTICE: These music commands are in BETA and may break"))
+                                                             color=bot_embed_colour).set_footer(text="NOTICE: These music commands are in BETA and may break"))
                         return
                 else:
                     await client.say(embed=discord.Embed(description="You do not have sufficiant permissions to perform this action.\nYou need a role called ``DJ``",
-                                                         color=bot_error_embed_colour).set_footer(test="NOTICE: These music commands are in BETA and may break"))
+                                                         color=bot_error_embed_colour).set_footer(text="NOTICE: These music commands are in BETA and may break"))
                     return
             except:
                 await client.say(embed=discord.Embed(description="Player could not be stopped",
-                                                     color=bot_error_embed_colour).set_footer(test="NOTICE: These music commands are in BETA and may break"))
+                                                     color=bot_error_embed_colour).set_footer(text="NOTICE: These music commands are in BETA and may break"))
                 return
 
         @commands.cooldown(1, 5, commands.BucketType.user)
@@ -1400,15 +1400,15 @@ class music_bot_commands:
                     players[VoiceChannelServer.id].stop()
                     music_bot_commands.MusicBot.CheckQueue(VoiceChannelServer)
                     await client.say(embed=discord.Embed(description="Skipped current track",
-                                                         color=bot_embed_colour).set_footer(test="NOTICE: These music commands are in BETA and may break"))
+                                                         color=bot_embed_colour).set_footer(text="NOTICE: These music commands are in BETA and may break"))
                     return
                 else:
                     await client.say(embed=discord.Embed(description="You do not have sufficiant permissions to perform this action.\nYou need a role called ``DJ``",
-                                                         color=bot_error_embed_colour).set_footer(test="NOTICE: These music commands are in BETA and may break"))
+                                                         color=bot_error_embed_colour).set_footer(text="NOTICE: These music commands are in BETA and may break"))
                     return
             except:
                 await client.say(embed=discord.Embed(description="Could not skip the current track",
-                                                     color=bot_error_embed_colour).set_footer(test="NOTICE: These music commands are in BETA and may break"))
+                                                     color=bot_error_embed_colour).set_footer(text="NOTICE: These music commands are in BETA and may break"))
                 return
 
         @commands.cooldown(1, 5, commands.BucketType.user)
@@ -1444,7 +1444,7 @@ class music_bot_commands:
                 return
             except:
                 await client.say(embed=discord.Embed(description="No currently playing track",
-                                                     color=bot_error_embed_colour).set_footer(test="NOTICE: These music commands are in BETA and may break"))
+                                                     color=bot_error_embed_colour).set_footer(text="NOTICE: These music commands are in BETA and may break"))
                 return
 
 client.run(BOT_TOKEN)
