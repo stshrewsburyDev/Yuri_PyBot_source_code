@@ -20,5 +20,5 @@ def INFO(log):
 
 def ERROR(log):
     DEBUG_LOG = "[ERROR] "
-    DEBUG_LOG += log
+    DEBUG_LOG += str(log)
     print(DEBUG_LOG)
