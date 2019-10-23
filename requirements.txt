@@ -7,6 +7,6 @@ google-api-python-client
 pip
 aiohttp ~= 2.3.10
 websockets
-youtube_dl==2019.7.16
+youtube_dl==2019.10.22
 psutil
 Flask==1.0.2
