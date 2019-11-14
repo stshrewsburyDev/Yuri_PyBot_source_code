@@ -1213,7 +1213,7 @@ class music_bot_commands:
             except:
                 return False
 
-        @commands.cooldown(1, 5, commands.BucketType.user)
+        """@commands.cooldown(1, 5, commands.BucketType.user)
         @client.command(pass_context = True)
         async def join(ctx):
             VoiceChannel = ctx.message.author.voice_channel
@@ -1234,8 +1234,21 @@ class music_bot_commands:
                                        icon_url=client.user.avatar_url)
                 JoinMessage.set_footer(text="NOTICE: These music commands are in BETA and may break")
                 await client.say(embed=JoinMessage)
-                return
-
+                return"""
+        
+        @commands.cooldown(1, 5, commands.BucketType.user)
+        @client.command(pass_context = True)
+        async def join(ctx):
+            VoiceChannel = ctx.message.author.voice_channel
+            await client.join_voice_channel(VoiceChannel)
+            JoinMessage = discord.Embed(description=str("Joined voice channel: ``" + str(VoiceChannel) + "``"),
+                                        color=bot_embed_colour)
+            JoinMessage.set_author(name="Joined channel:",
+                                   icon_url=client.user.avatar_url)
+            JoinMessage.set_footer(text="NOTICE: These music commands are in BETA and may break")
+            await client.say(embed=JoinMessage)
+            return
+            
         @commands.cooldown(1, 5, commands.BucketType.user)
         @client.command(pass_context = True)
         async def leave(ctx):
