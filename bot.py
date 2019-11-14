@@ -116,7 +116,7 @@ async def on_message(message):
     else:
         await client.process_commands(message)
 
-@client.event
+"""@client.event
 async def on_command_error(error,
                            ctx
                            ):
@@ -131,7 +131,7 @@ async def on_command_error(error,
         return
 
     else:
-        ERROR(error)
+        ERROR(error)"""
 
 class help_commands:
     @commands.cooldown(1, 10, commands.BucketType.user)
