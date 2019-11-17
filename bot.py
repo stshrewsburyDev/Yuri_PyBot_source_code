@@ -85,6 +85,7 @@ async def on_server_join(server):
                                           colour=bot_embed_colour)
     thanks_for_adding_msg.set_author(name="Hello!",
                                      icon_url=client.user.avatar_url)
+    thanks_for_adding_msg.set_footer(text="THIS BOT IS OLD AND THE NEW 6.0 REWRITE IS IN DEVELOPMENT")
     await client.send_message(server.owner,
                               embed=thanks_for_adding_msg)
 
@@ -142,6 +143,7 @@ class help_commands:
                                  colour=bot_embed_colour)
         help_msg.set_author(name="Main Help:",
                             icon_url=client.user.avatar_url)
+        help_msg.set_footer(text="THIS BOT IS OLD AND THE NEW 6.0 REWRITE IS IN DEVELOPMENT")
         await client.say(embed=help_msg)
 
     @commands.cooldown(1, 10, commands.BucketType.user)
@@ -152,6 +154,7 @@ class help_commands:
                                    colour=bot_embed_colour)
         g_help_msg.set_author(name="General Help:",
                               icon_url=client.user.avatar_url)
+        g_help_msg.set_footer(text="THIS BOT IS OLD AND THE NEW 6.0 REWRITE IS IN DEVELOPMENT")
         await client.say(embed=g_help_msg)
 
     @commands.cooldown(1, 10, commands.BucketType.user)
@@ -162,6 +165,7 @@ class help_commands:
                                    colour=bot_embed_colour)
         b_help_msg.set_author(name="Bot Help:",
                               icon_url=client.user.avatar_url)
+        b_help_msg.set_footer(text="THIS BOT IS OLD AND THE NEW 6.0 REWRITE IS IN DEVELOPMENT")
         await client.say(embed=b_help_msg)
 
     @commands.cooldown(1, 10, commands.BucketType.user)
@@ -172,6 +176,7 @@ class help_commands:
                                    colour=bot_embed_colour)
         s_help_msg.set_author(name="Server Help:",
                               icon_url=client.user.avatar_url)
+        s_help_msg.set_footer(text="THIS BOT IS OLD AND THE NEW 6.0 REWRITE IS IN DEVELOPMENT")
         await client.say(embed=s_help_msg)
 
     @commands.cooldown(1, 10, commands.BucketType.user)
@@ -182,6 +187,7 @@ class help_commands:
                                    colour=bot_embed_colour)
         a_help_msg.set_author(name="Admin Help:",
                               icon_url=client.user.avatar_url)
+        a_help_msg.set_footer(text="THIS BOT IS OLD AND THE NEW 6.0 REWRITE IS IN DEVELOPMENT")
         await client.say(embed=a_help_msg)
 
     @commands.cooldown(1, 10, commands.BucketType.user)
@@ -192,6 +198,7 @@ class help_commands:
                                    colour=bot_embed_colour)
         f_help_msg.set_author(name="Fun Help:",
                               icon_url=client.user.avatar_url)
+        f_help_msg.set_footer(text="THIS BOT IS OLD AND THE NEW 6.0 REWRITE IS IN DEVELOPMENT")
         await client.say(embed=f_help_msg)
 
     @commands.cooldown(1, 10, commands.BucketType.user)
@@ -202,6 +209,7 @@ class help_commands:
                                    colour=bot_embed_colour)
         m_help_msg.set_author(name="Music Help:",
                               icon_url=client.user.avatar_url)
+        m_help_msg
         await client.say(embed=m_help_msg)
 
 
