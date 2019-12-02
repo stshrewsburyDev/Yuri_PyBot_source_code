@@ -4,8 +4,9 @@
 [![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/powered-by-electricity.svg)](https://forthebadge.com)
 
-The Source Code For Yuri PyBot Used By Heroku To Host The Bot.
+##### The Source Code For Yuri PyBot Used By Heroku To Host The Bot.
 
+#### Made by Steven Shrewsbury Dev. (AKA: stshrewsburyDev)
 
 ## NOTICE: 
 This code is extremely bad and the layout is terrible.
