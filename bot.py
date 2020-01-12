@@ -722,7 +722,7 @@ class server_commands:
 
         await client.say(embed=stats_msg)
 
-class admin_commands:
+"""class admin_commands:
     @client.command(pass_context = True)
     async def kick(ctx, user: discord.Member = None, *, text: str=None):
         if ctx.message.author.server_permissions.kick_members:
@@ -924,7 +924,7 @@ class admin_commands:
             no_perms_msg.set_author(name="No Correct Perms:",
                                     icon_url=client.user.avatar_url)
             await client.say(embed=no_perms_msg)
-
+"""
 class fun_commands:
     @client.command(pass_context = True)
     async def dance(ctx):
@@ -1147,7 +1147,7 @@ class fun_commands:
 
                     await client.say(embed=rps_output)
 
-    @client.command(pass_context = True)
+    """@client.command(pass_context = True)
     async def say(ctx, *, text: str=None):
         say_msg = discord.Embed(title="",
                                 description=text,
@@ -1169,7 +1169,7 @@ class fun_commands:
                                       description=converted_msg,
                                       colour=bot_embed_colour)
         say_emoji_msg.set_author(name="Say Emoji Response:")
-        await client.say(embed=say_emoji_msg)
+        await client.say(embed=say_emoji_msg)"""
 
 class music_bot_commands:
     @commands.cooldown(1, 5, commands.BucketType.user)
