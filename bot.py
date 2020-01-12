@@ -119,8 +119,8 @@ async def on_message(message):
     if message.content.startswith("y!") or message.content.startswith("yuri!"):
         if str(message.author.id) in BAN_LIST:
             await client.send_message(message.channel, "Sorry im not allowed to listen to your cmds anymore, your banned for a week.")
-    else:
-        await client.process_commands(message)
+        else:
+            await client.process_commands(message)
 
 """@client.event
 async def on_command_error(error,
