@@ -116,7 +116,7 @@ async def playing_msg_loop():
 async def on_message(message):
     if message.author.bot is True:
         pass
-    if len message.content >= 1001:
+    if len(message.content) >= 1001:  # Thanks Minlor for pointing that out :D
         pass
     await client.process_commands(message)
 
