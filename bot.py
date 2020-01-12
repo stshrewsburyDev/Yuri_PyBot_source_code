@@ -42,6 +42,8 @@ bot_launch_time_string = str(time.strftime("%H")) + ":" + str(time.strftime("%M"
 bot_launch_date_string = str(time.strftime("%d")) + "/" + str(time.strftime("%m")) + "/" + str(time.strftime("%y"))
 INFO("task complete")
 
+BAN_LIST = ["231821149015769089"]
+
 @client.event
 async def on_ready():
     LOG("logged in as:")
@@ -114,6 +116,9 @@ async def playing_msg_loop():
 async def on_message(message):
     if message.author.bot is True:
         pass
+    if message.startswith("y!") or message.startswith("yuri!"):
+        if str(message.author.id) in BAN_LIST:
+            await client.send_message(message.channel, "Sorry im not allowed to listen to your cmds anymore, your banned for a week.")
     else:
         await client.process_commands(message)
 
@@ -722,7 +727,7 @@ class server_commands:
 
         await client.say(embed=stats_msg)
 
-"""class admin_commands:
+class admin_commands:
     @client.command(pass_context = True)
     async def kick(ctx, user: discord.Member = None, *, text: str=None):
         if ctx.message.author.server_permissions.kick_members:
@@ -924,7 +929,7 @@ class server_commands:
             no_perms_msg.set_author(name="No Correct Perms:",
                                     icon_url=client.user.avatar_url)
             await client.say(embed=no_perms_msg)
-"""
+
 class fun_commands:
     @client.command(pass_context = True)
     async def dance(ctx):
@@ -1147,7 +1152,7 @@ class fun_commands:
 
                     await client.say(embed=rps_output)
 
-    """@client.command(pass_context = True)
+    @client.command(pass_context = True)
     async def say(ctx, *, text: str=None):
         say_msg = discord.Embed(title="",
                                 description=text,
@@ -1169,7 +1174,7 @@ class fun_commands:
                                       description=converted_msg,
                                       colour=bot_embed_colour)
         say_emoji_msg.set_author(name="Say Emoji Response:")
-        await client.say(embed=say_emoji_msg)"""
+        await client.say(embed=say_emoji_msg)
 
 class music_bot_commands:
     @commands.cooldown(1, 5, commands.BucketType.user)
