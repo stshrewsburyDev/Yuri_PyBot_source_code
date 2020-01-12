@@ -116,7 +116,7 @@ async def playing_msg_loop():
 async def on_message(message):
     if message.author.bot is True:
         pass
-    if message.startswith("y!") or message.startswith("yuri!"):
+    if message.content.startswith("y!") or message.content.startswith("yuri!"):
         if str(message.author.id) in BAN_LIST:
             await client.send_message(message.channel, "Sorry im not allowed to listen to your cmds anymore, your banned for a week.")
     else:
