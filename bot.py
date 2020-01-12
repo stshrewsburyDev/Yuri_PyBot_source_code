@@ -116,9 +116,9 @@ async def playing_msg_loop():
 async def on_message(message):
     if message.author.bot is True:
         pass
-    if message.content.startswith("y!") or message.content.startswith("yuri!"):
-        if str(message.author.id) not in BAN_LIST:
-            await client.process_commands(message)
+    if len message.content >= 1001:
+        pass
+    await client.process_commands(message)
 
 """@client.event
 async def on_command_error(error,
