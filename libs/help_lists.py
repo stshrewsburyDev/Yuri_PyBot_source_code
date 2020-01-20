@@ -10,7 +10,7 @@ main_help = """
 **y!help_general** - Shows The General Commands Help
 **y!help_bot** - Shows The Bot Commands Help
 **y!help_server** - Shows The Server Commands Help
-**y!help_admin** - Shows The Admin Commands Help
+**y!help_admin** - ***DISSABLED!*** Shows The Admin Commands Help
 **y!help_fun** - Shows The Fun Commands Help
 """
 
@@ -40,9 +40,9 @@ server_help = """
 """
 
 admin_help = """
-**y!kick {@Mention} {Reason}** - Kicks The Specified User For The Reason (DONT PUT MORE THAN 1 MENTION)
-**y!ban {@Mention} {Reason}** - Bans The Specified User For The Reason (DONT PUT MORE THAN 1 MENTION)
-**y!warn {@Mention} {Reason}** - Warns The Specified User For The Reason (DONT PUT MORE THAN 1 MENTION)
+**y!kick {@Mention} {Reason}** - ***DISSABLED!*** Kicks The Specified User For The Reason (DONT PUT MORE THAN 1 MENTION)
+**y!ban {@Mention} {Reason}** - ***DISSABLED!*** Bans The Specified User For The Reason (DONT PUT MORE THAN 1 MENTION)
+**y!warn {@Mention} {Reason}** - ***DISSABLED!*** Warns The Specified User For The Reason (DONT PUT MORE THAN 1 MENTION)
 """
 
 fun_help = """
