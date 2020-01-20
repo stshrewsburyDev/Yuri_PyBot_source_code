@@ -727,10 +727,11 @@ class server_commands:
 
         await client.say(embed=stats_msg)
 
+"""
 class admin_commands:
     @client.command(pass_context = True)
     async def kick(ctx, user: discord.Member = None, *, text: str=None):
-        if str(ctx.message.server.id) in no:
+        if str(ctx.message.server.id) in NO:
             return
         if ctx.message.author.server_permissions.kick_members:
             if user is None:
@@ -801,7 +802,7 @@ class admin_commands:
 
     @client.command(pass_context = True)
     async def ban(ctx, user: discord.Member = None, *, text: str=None):
-        if str(ctx.message.server.id) in no:
+        if str(ctx.message.server.id) in NO:
             return
         if ctx.message.author.server_permissions.ban_members:
             if user is None:
@@ -875,7 +876,7 @@ class admin_commands:
 
     @client.command(pass_context = True)
     async def warn(ctx, user: discord.Member = None, *, text: str=None):
-        if str(ctx.message.server.id) in no:
+        if str(ctx.message.server.id) in NO:
             return
         if ctx.message.author.server_permissions.manage_server:
             if user is None:
@@ -935,6 +936,7 @@ class admin_commands:
             no_perms_msg.set_author(name="No Correct Perms:",
                                     icon_url=client.user.avatar_url)
             await client.say(embed=no_perms_msg)
+"""
 
 class fun_commands:
     @client.command(pass_context = True)
