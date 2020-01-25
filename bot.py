@@ -10,7 +10,7 @@ INFO("setting things up, please wait...")
 DEBUG("importing needed libraries...")
 from discord.ext import commands
 from discord.ext.commands import Bot
-import discord, asyncio, os, time, random, platform, requests, json, cpuinfo
+import discord, asyncio, os, time, random, platform, requests, json, cpuinfo, speedtest
 INFO("task complete")
 
 DEBUG("setting up custom libraries...")
@@ -138,6 +138,21 @@ async def on_command_error(error,
 
     else:
         ERROR(error)"""
+
+
+@client.command(pass_context = True)
+async def speedtest():
+    if str(ctx.message.author.id) == "312984580745330688":
+        message = client.say("Testing speed... plz wait")
+        st = speedtest.Speedtest()
+        st.get_best_server()
+        a = client.loop.run_in_executor(None, st.download)
+        d = await a
+        a = client.loop.run_in_executor(None, st.upload)
+        u = await a
+    
+        await client.edit_message(message, context=f"Download: {round(d / 1024 / 1024, 2)}MB/s\nUpload: {round(u / 1024 / 1024, 2)}MB/s")
+
 
 class help_commands:
     @commands.cooldown(1, 10, commands.BucketType.user)
