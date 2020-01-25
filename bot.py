@@ -10,7 +10,8 @@ INFO("setting things up, please wait...")
 DEBUG("importing needed libraries...")
 from discord.ext import commands
 from discord.ext.commands import Bot
-import discord, asyncio, os, time, random, platform, requests, json, cpuinfo, speedtest
+import discord, asyncio, os, time, random, platform, requests, json, cpuinfo
+import speedtest as ST
 INFO("task complete")
 
 DEBUG("setting up custom libraries...")
@@ -144,7 +145,7 @@ async def on_command_error(error,
 async def speedtest(ctx):
     if str(ctx.message.author.id) == "312984580745330688":
         message = client.say("Testing speed... plz wait")
-        st = speedtest.Speedtest()
+        st = ST.Speedtest()
         st.get_best_server()
         a = client.loop.run_in_executor(None, st.download)
         d = await a
