@@ -144,7 +144,7 @@ async def on_command_error(error,
 @client.command(pass_context = True)
 async def speedtest(ctx):
     if str(ctx.message.author.id) == "312984580745330688":
-        message = client.say("Testing speed... plz wait")
+        message = await client.say("Testing speed... plz wait")
         st = ST.Speedtest()
         st.get_best_server()
         a = client.loop.run_in_executor(None, st.download)
@@ -152,7 +152,7 @@ async def speedtest(ctx):
         a = client.loop.run_in_executor(None, st.upload)
         u = await a
     
-        await client.edit_message(message, context=f"Download: {round(d / 1024 / 1024, 2)}MB/s\nUpload: {round(u / 1024 / 1024, 2)}MB/s")
+        await client.edit_message(message, f"Download: {round(d / 1024 / 1024, 2)}MB/s\nUpload: {round(u / 1024 / 1024, 2)}MB/s")
 
 
 class help_commands:
