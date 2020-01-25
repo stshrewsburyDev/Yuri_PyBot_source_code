@@ -141,7 +141,7 @@ async def on_command_error(error,
 
 
 @client.command(pass_context = True)
-async def speedtest():
+async def speedtest(ctx):
     if str(ctx.message.author.id) == "312984580745330688":
         message = client.say("Testing speed... plz wait")
         st = speedtest.Speedtest()
