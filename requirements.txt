@@ -9,4 +9,5 @@ aiohttp ~= 2.3.10
 websockets==3.4
 youtube_dl==2019.11.28
 psutil
+speedtest-cli
 Flask==1.0.2
