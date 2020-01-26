@@ -23,6 +23,7 @@ INFO("task complete")
 
 DEBUG("setting up client...")
 BOT_TOKEN = str(os.environ.get("BOT_TOKEN"))
+DBL_TOKEN = str(os.environ.get("DBL_TOKEN"))
 BOT_LOG_WEBHOOK_URL = str(os.environ.get("BotLogWebhookURL"))
 Client = discord.Client()
 client = commands.Bot(command_prefix=str(os.environ.get("BotPrefix")))
@@ -49,6 +50,12 @@ NO = ["499912087938662402"]
 
 @client.event
 async def on_ready():
+    url = "https://discordbots.org/api/bots/" + str(client.user.id) + "/stats"
+    headers = {"Authorization": dbltoken}
+    payload = {"server_count": len(bot.servers)}
+    async with aiohttp.ClientSession() as aioclient:
+        await aioclient.post(url, data=payload, headers=headers)
+    
     LOG("logged in as:")
     next_log = "\t~ bot user name:" + str(client.user.name)
     LOG(next_log)
@@ -93,6 +100,12 @@ async def on_server_join(server):
     thanks_for_adding_msg.set_footer(text="THIS BOT IS OLD AND THE NEW 6.0 REWRITE IS IN DEVELOPMENT")
     await client.send_message(server.owner,
                               embed=thanks_for_adding_msg)
+    
+    url = "https://discordbots.org/api/bots/" + str(client.user.id) + "/stats"
+    headers = {"Authorization": dbltoken}
+    payload = {"server_count": len(bot.servers)}
+    async with aiohttp.ClientSession() as aioclient:
+        await aioclient.post(url, data=payload, headers=headers)
 
 @client.event
 async def on_server_remove(server):
@@ -100,6 +113,12 @@ async def on_server_remove(server):
     send_webhook_log(description=webhook_desc,
                      thumbnail=server.icon_url,
                      extra_fields=[])
+    
+    url = "https://discordbots.org/api/bots/" + str(client.user.id) + "/stats"
+    headers = {"Authorization": dbltoken}
+    payload = {"server_count": len(bot.servers)}
+    async with aiohttp.ClientSession() as aioclient:
+        await aioclient.post(url, data=payload, headers=headers)
 
 @client.event
 async def playing_msg_loop():
