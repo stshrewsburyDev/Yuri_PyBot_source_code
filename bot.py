@@ -10,7 +10,7 @@ INFO("setting things up, please wait...")
 DEBUG("importing needed libraries...")
 from discord.ext import commands
 from discord.ext.commands import Bot
-import discord, asyncio, os, time, random, platform, requests, json, cpuinfo
+import discord, asyncio, os, time, random, platform, requests, json, cpuinfo, aiohttp
 import speedtest as ST
 INFO("task complete")
 
