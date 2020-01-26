@@ -52,7 +52,7 @@ NO = ["499912087938662402"]
 async def on_ready():
     url = "https://discordbots.org/api/bots/" + str(client.user.id) + "/stats"
     headers = {"Authorization": DBL_TOKEN}
-    payload = {"server_count": len(bot.servers)}
+    payload = {"server_count": len(client.servers)}
     async with aiohttp.ClientSession() as aioclient:
         await aioclient.post(url, data=payload, headers=headers)
     
@@ -103,7 +103,7 @@ async def on_server_join(server):
     
     url = "https://discordbots.org/api/bots/" + str(client.user.id) + "/stats"
     headers = {"Authorization": DBL_TOKEN}
-    payload = {"server_count": len(bot.servers)}
+    payload = {"server_count": len(client.servers)}
     async with aiohttp.ClientSession() as aioclient:
         await aioclient.post(url, data=payload, headers=headers)
 
@@ -116,7 +116,7 @@ async def on_server_remove(server):
     
     url = "https://discordbots.org/api/bots/" + str(client.user.id) + "/stats"
     headers = {"Authorization": DBL_TOKEN}
-    payload = {"server_count": len(bot.servers)}
+    payload = {"server_count": len(client.servers)}
     async with aiohttp.ClientSession() as aioclient:
         await aioclient.post(url, data=payload, headers=headers)
 
