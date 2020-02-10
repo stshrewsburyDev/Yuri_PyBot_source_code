@@ -496,6 +496,10 @@ class bot_commands:
         bot_info_m.add_field(name="Total Servers:",
                              value=str(len(list(client.servers))),
                              inline=True)
+        
+        bot_info_m.add_field(name="Total Emojis:",
+                             value=str(len(client.emojis)),
+                             inline=True)
 
         bot_info_m.add_field(name="Total Channels:",
                              value=str(len(list(client.get_all_channels()))),
