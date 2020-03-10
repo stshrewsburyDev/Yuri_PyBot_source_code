@@ -10,7 +10,7 @@ INFO("setting things up, please wait...")
 DEBUG("importing needed libraries...")
 from discord.ext import commands
 from discord.ext.commands import Bot
-import discord, asyncio, os, time, random, platform, requests, json, cpuinfo, aiohttp
+import discord, asyncio, os, time, random, platform, requests, json, cpuinfo, aiohttp, psutil
 import speedtest as ST
 INFO("task complete")
 
@@ -523,6 +523,10 @@ class bot_commands:
         
         bot_info_m.add_field(name="Host CPU:",
                              value='{}'.format(cpuInfo["brand"]),
+                             inline=False)
+        
+        bot_info_m.add_field(name="Host CPU usage:",
+                             value='{}%'.format(psutil.cpu_percent(interval=1)),
                              inline=False)
 
         await client.say(embed=bot_info_m)
